@@ -20,15 +20,29 @@ const cssRule = {
   use:['css-loader', 'style-loader']
 }
 
+const urlLoaderRule = {
+  test: /.(png|jpe?g|gif|svg)$/i,
+  use: {
+    loader: 'file-loader',
+    options:{
+      limit: 8192
+    }
+  } 
+}
 module.exports = {
+  entry:[
+    './src/index.js',
+    '@babel/polyfill'
+  ]
   module:{
     rules:[
       babelRule,
-      cssRule
+      cssRule,
+      urlLoaderRule,
     ]
   },
   plugins:[
-    new HTMLWebpackPlugin({teplate:'./src/index.html'})
+    new HTMLWebpackPlugin({template:'./src/index.html'})
   ],
   devtool: 'source-map',
   watch:true,
